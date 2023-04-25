@@ -1,4 +1,4 @@
-import { procedure, router } from "./trpc";
+import { router } from "./trpc";
 import { projectRouter } from "./routes/project";
 import { taskRouter } from "./routes/task";
 
