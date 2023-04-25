@@ -4,6 +4,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 interface NavProps {
   dark: boolean;
@@ -13,7 +14,6 @@ interface NavProps {
 const Nav: FC<NavProps> = ({ dark, setDark }) => {
   const { data: session } = useSession();
   const [nav, setNav] = useState(false);
-  console.log(session);
   return (
     <nav className="max-w-5xl mx-auto border-b border-b-gray-400 mb-16 md:mb-32">
       <div className="w-full flex justify-between items-center py-2 px-4">
@@ -32,6 +32,20 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
         <ul className="hidden gap-5 md:flex">
           {session ? (
             <>
+              <li>
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={session.user?.image ?? ""}
+                    alt={`${session.user?.name ?? "User"} Profile Picture`}
+                    width={40}
+                    height={40}
+                    className="rounded-full border-2 border-sky-500"
+                  />
+                  <p className="text-lg font-medium dark:text-white">
+                    {session.user?.name}
+                  </p>
+                </div>
+              </li>
               <li>
                 <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600">
                   <FiLogOut />
@@ -86,10 +100,24 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
         <div className="pt-16 px-2">
           <ul>
             {session ? (
-              <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
-                <FiLogOut />
-                Logout
-              </li>
+              <>
+                {session.user?.name && (
+                  <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
+                    <Image
+                      src={session.user?.image ?? ""}
+                      alt={`${session.user?.name ?? "User"} Profile Picture`}
+                      width={40}
+                      height={40}
+                      className="rounded-full border-2"
+                    />
+                    {session.user?.name}
+                  </li>
+                )}
+                <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
+                  <FiLogOut />
+                  Logout
+                </li>
+              </>
             ) : (
               <>
                 <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
