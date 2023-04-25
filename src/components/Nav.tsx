@@ -3,7 +3,7 @@ import { AiOutlineUser, AiFillEdit } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
-const session = false;
+import { useSession, signIn, signOut } from "next-auth/react";
 
 interface NavProps {
   dark: boolean;
@@ -11,7 +11,9 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ dark, setDark }) => {
+  const { data: session } = useSession();
   const [nav, setNav] = useState(false);
+  console.log(session);
   return (
     <nav className="max-w-5xl mx-auto border-b border-b-gray-400 mb-16 md:mb-32">
       <div className="w-full flex justify-between items-center py-2 px-4">
@@ -29,16 +31,21 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
         </div>
         <ul className="hidden gap-5 md:flex">
           {session ? (
-            <li>
-              <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600">
-                <FiLogOut />
-                Logout
-              </button>
-            </li>
-          ) : (
             <>
               <li>
                 <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600">
+                  <FiLogOut />
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button
+                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
+                  onClick={() => signIn()}
+                >
                   <AiOutlineUser />
                   Sign In
                 </button>

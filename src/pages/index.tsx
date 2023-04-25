@@ -23,7 +23,14 @@ export default function Home() {
   return (
     <div>
       <header className="container max-w-3xl flex flex-col-reverse justify-center items-center gap-6 mx-auto text-center md:flex-row md:justify-between">
-        <Image src={Img1} alt="default manager" width={300} height={300} />
+        <Image
+          src={Img1}
+          alt="default manager"
+          width={300}
+          height={300}
+          className="w-72 h-64"
+          priority
+        />
         <div>
           <h1 className="text-3xl font-medium dark:text-white">
             Log in and unlock all features...
