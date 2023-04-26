@@ -2,6 +2,7 @@ import Image from "next/image";
 import Typed from "typed.js";
 import { useRef, useEffect } from "react";
 import Img1 from "../../public/images/img1.svg";
+import HeaderLayout from "@/pages/layout";
 
 export default function Home() {
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -21,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <section className="mt-16 md:mt-32">
       <header className="container max-w-3xl flex flex-col-reverse justify-center items-center gap-6 mx-auto text-center md:flex-row md:justify-between">
         <Image
           src={Img1}
@@ -46,6 +47,6 @@ export default function Home() {
           <p>&copy; Juan Isturiz</p>
         </div>
       </footer>
-    </div>
+    </section>
   );
 }

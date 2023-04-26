@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface NavProps {
   dark: boolean;
@@ -15,7 +16,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
   const { data: session } = useSession();
   const [nav, setNav] = useState(false);
   return (
-    <nav className="max-w-5xl mx-auto border-b border-b-gray-400 mb-16 md:mb-32">
+    <nav className="max-w-5xl mx-auto border-b border-b-gray-400">
       <div className="w-full flex justify-between items-center py-2 px-4">
         <div>
           <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
@@ -47,7 +48,10 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
                 </div>
               </li>
               <li>
-                <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600">
+                <button
+                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
+                  onClick={() => signOut()}
+                >
                   <FiLogOut />
                   Logout
                 </button>
@@ -57,7 +61,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
             <>
               <li>
                 <button
-                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
+                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md outline-2 outline transition-all duration-200 ease-linear outline-sky-300 hover:outline-offset-2 dark:bg-sky-500 dark:outline-sky-500"
                   onClick={() => signIn()}
                 >
                   <AiOutlineUser />
@@ -65,16 +69,18 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
                 </button>
               </li>
               <li>
-                <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600">
-                  <AiFillEdit />
-                  Sign Up
-                </button>
+                <Link href={"/register"}>
+                  <button className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md outline-2 outline transition-all duration-200 ease-linear outline-sky-300 hover:outline-offset-2 dark:bg-sky-500 dark:outline-sky-500">
+                    <AiFillEdit />
+                    Sign Up
+                  </button>
+                </Link>
               </li>
             </>
           )}
           <li>
             <button
-              className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
+              className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md outline-2 outline transition-all duration-200 ease-linear outline-sky-300 hover:outline-offset-2 dark:bg-sky-500 dark:outline-sky-500"
               onClick={setDark}
             >
               {dark ? (
@@ -113,7 +119,10 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
                     {session.user?.name}
                   </li>
                 )}
-                <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
+                <li
+                  className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  cursor-pointer dark:text-white"
+                  onClick={() => signOut()}
+                >
                   <FiLogOut />
                   Logout
                 </li>
@@ -131,7 +140,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
               </>
             )}
             <li
-              className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium cursor-pointer  dark:text-white"
+              className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium cursor-pointer dark:text-white"
               onClick={setDark}
             >
               {dark ? (

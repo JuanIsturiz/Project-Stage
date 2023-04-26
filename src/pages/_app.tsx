@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "./layout";
 import Head from "next/head";
 import { api } from "../utils/trpc";
 import { SessionProvider } from "next-auth/react";
+import Layout from "@/pages/layout";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

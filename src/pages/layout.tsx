@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { Urbanist } from "next/font/google";
 import Nav from "@/components/Nav";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -11,6 +12,7 @@ const urbanist = Urbanist({
 });
 
 const Layout: FC<LayoutProps> = ({ children }) => {
+  const { pathname } = useRouter();
   const [dark, setDark] = useState(false);
   return (
     <main
