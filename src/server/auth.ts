@@ -25,7 +25,6 @@ export const AuthOptions: NextAuthOptions = {
       return token;
     },
     session: ({ session: incoming, token }) => {
-      console.log("session");
       if (token) {
         // session.id = token.id;
       }
@@ -51,11 +50,8 @@ export const AuthOptions: NextAuthOptions = {
     CredentialsProvider({
       type: "credentials",
       name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email", placeholder: "me@email.com" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
+      credentials: {},
+      async authorize(credentials, _req) {
         const { email, password } = credentials as {
           email: string;
           password: string;
@@ -83,6 +79,9 @@ export const AuthOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/signin",
+  },
 };
 
 export const getServerAuthSession = (ctx: {
