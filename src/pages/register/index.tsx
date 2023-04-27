@@ -2,15 +2,20 @@ import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { api } from "@/utils/trpc";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 interface RegisterData {
-  username: String;
-  email: String;
-  password: String;
-  confirmPassword: String;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export default function Register() {
+  const { replace } = useRouter();
   const schema: ZodType<RegisterData> = z
     .object({
       username: z
@@ -42,8 +47,23 @@ export default function Register() {
     resolver: zodResolver(schema),
   });
 
+  const { mutate: createUser, isLoading } = api.user.addUser.useMutation({
+    onSuccess() {
+      replace("/api/auth/signin");
+    },
+    onError(error) {
+      const errorMessage = error.data?.zodError?.fieldErrors.content;
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0]);
+      } else {
+        toast.error("Failed to post! Please try again later.");
+      }
+    },
+  });
+
   const onSubmit = (data: RegisterData) => {
-    console.log(data);
+    const { username, email, password } = data;
+    createUser({ username, email, password });
   };
 
   return (
@@ -120,15 +140,20 @@ export default function Register() {
               </span>
             )}
           </div>
-          <input
+          <button
+            disabled={isLoading}
             className="cursor-pointer text-xl text-white rounded-lg bg-sky-300 py-2 px-4 font-medium mx-auto outline-2 outline transition-all duration-200 ease-linear outline-sky-300 hover:outline-offset-2"
             type="submit"
-          />
+          >
+            <span className="flex justify-center items-center gap-2">
+              Submit{isLoading && <LoadingSpinner size={22} />}
+            </span>
+          </button>
         </div>
       </form>
       <p className="text-lg mt-2">
         Already have an account? Click{" "}
-        <Link href={""} className="text-sky-300 underline">
+        <Link href={"/api/auth/signin"} className="text-sky-300 underline">
           here
         </Link>{" "}
         and go to Sign In page.

@@ -2,20 +2,38 @@ import { env } from "@/env.mjs";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./db";
 import { GetServerSidePropsContext } from "next";
+import bcrypt from "bcrypt";
 
 export const AuthOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+  jwt: {
+    secret: "test",
   },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    session: ({ session: incoming, token }) => {
+      console.log("session");
+      if (token) {
+        // session.id = token.id;
+      }
+      const session = { ...incoming, id: token.id };
+      return session;
+    },
+  },
+  secret: env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -25,6 +43,44 @@ export const AuthOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    CredentialsProvider({
+      type: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "me@email.com" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+
+        const dbUser = await prisma.user.findFirst({
+          where: { email: email.toLowerCase() },
+        });
+        if (!dbUser) throw new Error("No user found");
+
+        if (!dbUser.password)
+          throw new Error("Please Sign Up first to log in using credentials");
+
+        const passwordCheck = await bcrypt.compare(password, dbUser.password);
+
+        if (!passwordCheck) throw new Error("Password doesn't match");
+        const user = {
+          id: dbUser.id,
+          name: dbUser.name,
+          email: dbUser.email ?? "",
+          image: dbUser.image ?? "",
+        };
+
+        return user;
+      },
     }),
   ],
 };

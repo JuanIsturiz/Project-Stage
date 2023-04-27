@@ -4,6 +4,7 @@ import Head from "next/head";
 import { api } from "../utils/trpc";
 import { SessionProvider } from "next-auth/react";
 import Layout from "@/pages/layout";
+import { Toaster } from "react-hot-toast";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -15,6 +16,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
+        <Toaster position="bottom-center" />
         <Component {...pageProps} />
       </Layout>
     </SessionProvider>

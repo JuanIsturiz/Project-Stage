@@ -6,6 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import defaultUser from "../../public/images/default-user.png";
 
 interface NavProps {
   dark: boolean;
@@ -13,7 +14,7 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ dark, setDark }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [nav, setNav] = useState(false);
   return (
     <nav className="max-w-5xl mx-auto border-b border-b-gray-400">
@@ -35,13 +36,14 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
             <>
               <li>
                 <div className="flex items-center gap-2">
-                  <Image
-                    src={session.user?.image ?? ""}
+                  <img
+                    src={session.user?.image || defaultUser.src}
                     alt={`${session.user?.name ?? "User"} Profile Picture`}
                     width={40}
                     height={40}
-                    className="rounded-full border-2 border-sky-500"
+                    className="rounded-full border-2 border-sky-500 aspect-square object-cover"
                   />
+
                   <p className="text-lg font-medium dark:text-white">
                     {session.user?.name}
                   </p>
@@ -109,12 +111,12 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
               <>
                 {session.user?.name && (
                   <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
-                    <Image
-                      src={session.user?.image ?? ""}
+                    <img
+                      src={session.user?.image || defaultUser.src}
                       alt={`${session.user?.name ?? "User"} Profile Picture`}
                       width={40}
                       height={40}
-                      className="rounded-full border-2"
+                      className="rounded-full border-2  aspect-square object-cover"
                     />
                     {session.user?.name}
                   </li>

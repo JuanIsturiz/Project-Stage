@@ -2,7 +2,6 @@ import Image from "next/image";
 import Typed from "typed.js";
 import { useRef, useEffect } from "react";
 import Img1 from "../../public/images/img1.svg";
-import HeaderLayout from "@/pages/layout";
 
 export default function Home() {
   const typedRef = useRef<HTMLSpanElement>(null);
