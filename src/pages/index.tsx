@@ -2,11 +2,18 @@ import Image from "next/image";
 import Typed from "typed.js";
 import { useRef, useEffect } from "react";
 import Img1 from "../../public/images/img1.svg";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { push } = useRouter();
+  const { status } = useSession();
   const typedRef = useRef<HTMLSpanElement>(null);
-
   useEffect(() => {
+    if (status === "authenticated") {
+      push("/dashboard");
+    }
+
     const typed = new Typed(typedRef.current, {
       strings: ["Create", "Read", "Update", "Delete"],
       typeSpeed: 100,
@@ -18,7 +25,7 @@ export default function Home() {
     return () => {
       typed.destroy();
     };
-  }, []);
+  }, [status]);
 
   return (
     <section className="mt-16 md:mt-32">

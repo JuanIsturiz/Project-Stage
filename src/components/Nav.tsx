@@ -4,7 +4,6 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
 import { useSession, signIn, signOut } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import defaultUser from "../../public/images/default-user.png";
 
@@ -14,15 +13,18 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ dark, setDark }) => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [nav, setNav] = useState(false);
   return (
+    // Desktop Navbar
     <nav className="max-w-5xl mx-auto border-b border-b-gray-400">
       <div className="w-full flex justify-between items-center py-2 px-4">
         <div>
-          <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
-            Project Stage
-          </h1>
+          <Link href={"/"}>
+            <h1 className="text-4xl font-semibold text-gray-800 dark:text-white hover:animate-pulse">
+              Project Stage
+            </h1>
+          </Link>
         </div>
         <div className="block z-50 md:hidden">
           <RxHamburgerMenu
@@ -52,7 +54,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
               <li>
                 <button
                   className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   <FiLogOut />
                   Logout
@@ -100,6 +102,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
           </li>
         </ul>
       </div>
+      {/* Mobile Sidebar */}
       <div
         className={`${
           nav ? "fixed" : "fixed right-[-100%]"
@@ -131,11 +134,16 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
               </>
             ) : (
               <>
-                <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
-                  <AiOutlineUser />
-                  Sign Up
-                </li>
-                <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
+                <Link href={"/register"} onClick={() => setNav(false)}>
+                  <li className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white">
+                    <AiOutlineUser />
+                    Sign Up
+                  </li>
+                </Link>
+                <li
+                  className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  dark:text-white"
+                  onClick={() => signIn()}
+                >
                   <AiFillEdit />
                   Sign In
                 </li>

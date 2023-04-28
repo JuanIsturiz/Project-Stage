@@ -21,14 +21,12 @@ export const AuthOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
       }
-
       return token;
     },
-    session: ({ session: incoming, token }) => {
+    session: ({ session, token }) => {
       if (token) {
-        // session.id = token.id;
+        return { ...session, id: token.id };
       }
-      const session = { ...incoming, id: token.id };
       return session;
     },
   },
