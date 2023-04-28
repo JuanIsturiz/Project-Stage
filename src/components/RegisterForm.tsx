@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { LoadingSpinner } from "@/components/loaders/LoadingSpinner";
 
 interface RegisterData {
   username: string;

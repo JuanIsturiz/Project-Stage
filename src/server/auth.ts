@@ -1,5 +1,5 @@
 import { env } from "@/env.mjs";
-import { NextAuthOptions, getServerSession } from "next-auth";
+import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
@@ -9,6 +9,16 @@ import { prisma } from "./db";
 import { GetServerSidePropsContext } from "next";
 import bcrypt from "bcrypt";
 
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: {
+      id: string;
+      // ...other properties
+      // role: UserRole;
+    } & DefaultSession["user"];
+  }
+}
+
 export const AuthOptions: NextAuthOptions = {
   jwt: {
     secret: "test",
@@ -17,18 +27,19 @@ export const AuthOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: ({ user, token }) => {
       if (user) {
         token.id = user.id;
       }
       return token;
     },
-    session: ({ session, token }) => {
-      if (token) {
-        return { ...session, id: token.id };
-      }
-      return session;
-    },
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.id,
+      },
+    }),
   },
   secret: env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),

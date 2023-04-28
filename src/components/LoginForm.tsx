@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { LoadingSpinner } from "@/components/loaders/LoadingSpinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { FC, useState } from "react";
@@ -37,7 +37,7 @@ const LoginForm: FC<{ onToast: () => void }> = ({ onToast }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col items-center w-9/12 mx-auto">
+      <div className="flex flex-col items-center w-9/12 mx-auto mb-3">
         <div className="flex flex-col items-start gap-1 w-11/12 mb-2">
           <label
             className="text-lg font-medium dark:text-white"
