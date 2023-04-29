@@ -30,26 +30,29 @@ const NewProjectForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center pr-1 rounded shadow-md bg-white dark:bg-zinc-900">
-        <input
-          className="w-full bg-transparent border-0 border-transparent px-1 rounded focus:border-transparent focus:ring-0 dark:text-zinc-200"
-          type="text"
-          placeholder="Learn Docker..."
-          {...register("title")}
-        />
-        <button type="submit">
-          {isLoading ? (
-            <LoadingSpinner size={24} />
-          ) : (
-            <MdPostAdd
-              size={30}
-              className="text-zinc-400 hover:text-sky-400 dark:text-zinc-700 dark:hover:text-sky-600"
-            />
-          )}
-        </button>
-      </div>
-    </form>
+    <>
+      <h4 className="text-lg font-medium mb-1 dark:text-white">New Project</h4>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex items-center pr-1 rounded shadow-md bg-white dark:bg-zinc-900">
+          <input
+            className="w-full bg-transparent border-0 border-transparent px-1 rounded focus:border-transparent focus:ring-0 dark:text-zinc-200"
+            type="text"
+            placeholder="Learn Docker..."
+            {...register("title")}
+          />
+          <button disabled={isLoading} type="submit">
+            {isLoading ? (
+              <LoadingSpinner size={24} />
+            ) : (
+              <MdPostAdd
+                size={30}
+                className="text-zinc-400 hover:text-sky-400 dark:text-zinc-700 dark:hover:text-sky-600"
+              />
+            )}
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

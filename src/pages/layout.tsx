@@ -23,7 +23,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <main
       className={`${urbanist.className} ${
-        dark ? "dark bg-zinc-950" : ""
+        dark ? "dark bg-zinc-950" : "bg-zinc-100"
       } min-h-screen text-gray-800 transition-colors duration-200`}
     >
       <Nav

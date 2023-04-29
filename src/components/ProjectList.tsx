@@ -1,11 +1,15 @@
-import { api } from "@/utils/trpc";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Project from "./Project";
 import LoadingProjects from "./loaders/LoadingProjects";
+import { FC } from "react";
 
-const ProjectList = () => {
+interface ProjectListProps {
+  projects: IProject[] | undefined;
+  isLoading: boolean;
+}
+
+const ProjectList: FC<ProjectListProps> = ({ projects, isLoading }) => {
   const [parent] = useAutoAnimate();
-  const { data: projects, isLoading } = api.project.getAll.useQuery();
   return (
     <div
       ref={parent}
@@ -14,7 +18,9 @@ const ProjectList = () => {
       {isLoading ? (
         <LoadingProjects />
       ) : (
-        projects?.map((project) => <Project project={project} />)
+        projects?.map((project) => (
+          <Project key={project.id} project={project} />
+        ))
       )}
     </div>
   );
