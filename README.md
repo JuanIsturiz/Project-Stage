@@ -1,3 +1,70 @@
+# Project Stage
+
+Hello again!! Welcome to my prototype of a project management application.
+
+---
+
+Thank you for joining me in my coding journey!!
+
+### Description
+
+A fullstack application where I put in practice new technologies I've learned, such as Next.js, tailwindcss, next-auth, prisma and tRPC. Project Stage is an user interface for managing projects and tasks.
+
+### Setup
+
+1. Run `npm install` so every dependency in the package.json file installs correctly.
+2. Create a .env file and pass the correct information for every key (use sample.env as an example).
+3. Run `npm run dev` to start the application on a local server.
+
+### Dependencies
+
+- @formkit/auto-animate
+- @hookform/resolvers
+- @next-auth/prisma-adapter
+- @prisma/client
+- @tailwindcss/forms
+- @tanstack/react-query
+- @trpc/client
+- @trpc/next
+- @trpc/react-query
+- @trpc/server
+- @types/node
+- @types/react
+- @types/react-dom
+- autoprefixer
+- bcrypt
+- dayjs
+- eslint
+- eslint-config-next
+- next
+- next-auth
+- postcss
+- react
+- react-dom
+- react-hook-form
+- react-hot-toast
+- react-icons
+- superjson
+- tailwindcss
+- typed.js
+- typescript
+- zod
+
+### devDependencies
+
+- @types/bcrypt
+- prisma
+- ts-node
+
+---
+
+### Previews
+
+![App Preview Image 1](/images/preview01.png "App Preview Image 1")
+![App Preview Image 2](/images/preview02.png "App Preview Image 2")
+![App Preview Image 3](/images/preview03.png "App Preview Image 3")
+![App Preview Image 4](/images/preview04.png "App Preview Image 4")
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -30,9 +97,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
