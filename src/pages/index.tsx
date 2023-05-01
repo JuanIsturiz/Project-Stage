@@ -28,17 +28,17 @@ export default function Home() {
   }, [status]);
 
   return (
-    <section className="mt-16 md:mt-32">
-      <header className="container max-w-3xl flex flex-col-reverse justify-center items-center gap-6 mx-auto text-center md:flex-row md:justify-between">
+    <section className="mt-16 overflow-y-hidden md:mt-32">
+      <header className="overflow-hidden container max-w-3xl flex flex-col-reverse justify-center items-center gap-6 mx-auto text-center md:flex-row md:justify-between">
         <Image
           src={Img1}
           alt="default manager"
           width={300}
           height={300}
-          className="w-72 h-64"
+          className="intro-left w-72 h-64"
           priority
         />
-        <div>
+        <div className="intro-right">
           <h1 className="text-3xl font-medium dark:text-white">
             Log in and unlock all features...
           </h1>
@@ -48,7 +48,7 @@ export default function Home() {
           ></span>
         </div>
       </header>
-      <footer className="absolute w-full bottom-0 pb-2">
+      <footer className="intro-top absolute w-full bottom-0 pb-2">
         <div className="text-2xl text-center dark:text-white">
           <p>&copy; Juan Isturiz</p>
         </div>

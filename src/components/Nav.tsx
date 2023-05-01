@@ -53,7 +53,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
               </li>
               <li>
                 <button
-                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md hover:bg-sky-400 dark:bg-sky-500 dark:hover:bg-sky-600"
+                  className="flex items-center justify-center gap-1 text-white font-medium bg-sky-300 py-2 px-4 rounded-md  outline-2 outline transition-all duration-200 ease-linear outline-sky-300 hover:outline-offset-2 dark:bg-sky-500 dark:outline-sky-500"
                   onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   <FiLogOut />
@@ -126,7 +126,7 @@ const Nav: FC<NavProps> = ({ dark, setDark }) => {
                 )}
                 <li
                   className="flex items-center justify-end gap-1 text-2xl pr-4 pb-1 border-b mb-6 font-medium  cursor-pointer dark:text-white"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   <FiLogOut />
                   Logout

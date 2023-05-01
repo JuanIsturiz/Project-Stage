@@ -1,4 +1,4 @@
-import { ZodType, z } from "zod";
+import { ZodDate, ZodType, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaCheck } from "react-icons/fa";
@@ -71,7 +71,7 @@ const NewTaskForm: FC<{ selectedProject: IProject | null }> = ({
               Title
             </label>
             <input
-              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark: text-zinc-100 dark:filter"
+              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:filter"
               type="text"
               id="title"
               placeholder="Refactor App.tsx..."
@@ -86,7 +86,7 @@ const NewTaskForm: FC<{ selectedProject: IProject | null }> = ({
               Description
             </label>
             <textarea
-              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark: text-zinc-100 dark:filter"
+              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:filter"
               id="description"
               placeholder="Move fetchPost() to a separate component..."
               {...register("description")}
@@ -100,7 +100,7 @@ const NewTaskForm: FC<{ selectedProject: IProject | null }> = ({
               Due To
             </label>
             <input
-              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark: text-zinc-100"
+              className="rounded border-zinc-200 focus:ring-sky-400 focus:ring-2 focus:border-transparent dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100"
               type="date"
               {...register("dueTo", { valueAsDate: true })}
             />

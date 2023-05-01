@@ -1,18 +1,20 @@
 import { FC } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Project from "./Project";
-import LoadingSkeleton from "./loaders/LoadingProjects";
+import LoadingSkeleton from "./loaders/LoadingSkeleton";
 
 interface ProjectListProps {
   projects: IProject[] | undefined;
   isLoading: boolean;
   onProjectClick: (project: IProject) => void;
+  selectedProject: IProject | undefined;
 }
 
 const ProjectList: FC<ProjectListProps> = ({
   projects,
   isLoading,
   onProjectClick,
+  selectedProject,
 }) => {
   const [parent] = useAutoAnimate();
   return (
@@ -28,6 +30,7 @@ const ProjectList: FC<ProjectListProps> = ({
             key={project.id}
             project={project}
             onProjectClick={() => onProjectClick(project)}
+            selected={selectedProject?.id === project.id}
           />
         ))
       )}

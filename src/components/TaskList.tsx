@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Task from "./Task";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import LoadingSkeleton from "./loaders/LoadingProjects";
+import LoadingSkeleton from "./loaders/LoadingSkeleton";
 
 interface TaskListProps {
   tasks: ITask[] | undefined;

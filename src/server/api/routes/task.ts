@@ -27,15 +27,18 @@ export const taskRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const task = await ctx.prisma.task.create({
+      const fixedDate = new Date(
+        input.dueTo.setDate(input.dueTo.getDate() + 1)
+      );
+      await ctx.prisma.task.create({
         data: {
           title: input.title,
           description: input.description,
-          dueTo: input.dueTo,
+          dueTo: fixedDate,
           projectId: input.projectId,
         },
       });
-      return task;
+      return true;
     }),
   remove: procedure
     .input(

@@ -66,15 +66,15 @@ const Task: FC<TaskProps> = ({ task }) => {
       <div className="flex items-center justify-between transition-all duration-200 group-hover:pl-4 dark:text-white">
         <div className="flex items-center gap-2">
           <h3 className="cursor-pointer text-2xl">{title}</h3>
-          <span className="text-2xl dark:text-white">·</span>
-          <span className="text-lg text-zinc-500 dark:text-zinc-300">
+          <span className="hidden text-2xl md:block dark:text-white">·</span>
+          <span className="hidden text-lg text-zinc-500 md:block dark:text-zinc-300">
             {dayjs(updatedAt).fromNow()}
           </span>
         </div>
         <div className="flex gap-2 items-center">
           <input
             type="checkbox"
-            className="rounded"
+            className="cursor-pointer text-sky-500 rounded dark:text-sky-600"
             checked={completed}
             onChange={() => {}}
             onClick={handleCompletedCheck}

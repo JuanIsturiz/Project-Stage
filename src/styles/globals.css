@@ -18,6 +18,74 @@ select:-webkit-autofill:focus {
   animation: grow 200ms ease-in-out
 }
 
+.intro-top {
+  animation: top-slide 1s ease-in-out;
+}
+
+.intro-bottom {
+  animation: bottom-slide 1s ease-in-out;
+}
+
+.intro-left {
+  animation: left-slide 1s ease-in-out;
+}
+
+.intro-right {
+  animation: right-slide 1s ease-in-out;
+}
+
+
+
+@keyframes top-slide {
+  0% {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bottom-slide {
+  0% {
+    transform: translateY(8rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes left-slide {
+  0% {
+    transform: translateX(-8rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes right-slide {
+  0% {
+    transform: translateX(8rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+}
+
+
 @keyframes grow {
   0% {
     scale: 0;

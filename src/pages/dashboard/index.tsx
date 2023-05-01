@@ -8,10 +8,6 @@ import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useState } from "react";
 
-// todo finish tasklist
-// todo add task component
-//? check tasks query functionality
-
 const Dashboard = () => {
   const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
 
@@ -36,10 +32,10 @@ const Dashboard = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 mt-4">
+    <section className="max-w-6xl mx-auto px-4 mt-4 select-none">
       <div className="grid grid-rows-4 grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-1 md:gap-2">
         <div className="row-span-1 md:col-span-1">
-          <div className="p-2 shadow-md bg-sky-200 rounded dark:bg-[#001845]">
+          <div className="p-2 shadow-md bg-sky-200 rounded dark:bg-[#001845] dark:shadow-zinc-900">
             <h3 className="text-2xl text-center border-b-[1px] border-b-sky-50 font-medium mb-2 dark:text-white">
               Projects
             </h3>
@@ -49,6 +45,7 @@ const Dashboard = () => {
               projects={projects}
               isLoading={isLoadingProjects}
               onProjectClick={handleProjectClick}
+              selectedProject={selectedProject}
             />
           </div>
         </div>

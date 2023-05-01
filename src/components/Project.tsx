@@ -3,10 +3,11 @@ import { FaTrash } from "react-icons/fa";
 import { LoadingSpinner } from "./loaders/LoadingSpinner";
 import { api } from "@/utils/trpc";
 
-const Project: FC<{ project: IProject; onProjectClick: () => void }> = ({
-  project,
-  onProjectClick,
-}) => {
+const Project: FC<{
+  project: IProject;
+  onProjectClick: () => void;
+  selected: boolean;
+}> = ({ project, onProjectClick, selected }) => {
   const { id, title } = project;
 
   const ctx = api.useContext();
@@ -24,7 +25,11 @@ const Project: FC<{ project: IProject; onProjectClick: () => void }> = ({
     <div className="group/project flex justify-center items-center gap-2 md:mb-3">
       <div
         key={id}
-        className="basis-48 cursor-pointer text-center text-white font-medium text-lg px-4 py-2 bg-sky-400 rounded-xl shadow-md hover:bg-sky-500 dark:bg-[#0353a4] dark:hover:bg-sky-700"
+        className={`basis-48 cursor-pointer text-center text-white font-medium text-lg px-4 py-2 ${
+          selected
+            ? "bg-sky-600 hover:bg-sky-800 dark:bg-sky-800 dark:hover:bg-sky-900"
+            : "bg-sky-400 hover:bg-sky-500 dark:bg-sky-700 dark:hover:bg-sky-800"
+        } rounded-xl shadow-md`}
         onClick={onProjectClick}
       >
         <p>{title}</p>
