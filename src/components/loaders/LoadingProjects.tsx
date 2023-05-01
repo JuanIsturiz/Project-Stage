@@ -1,12 +1,14 @@
-const LoadingProjects = () => {
+import { FC } from "react";
+
+const LoadingSkeleton: FC<{ qty: number }> = ({ qty }) => {
   return (
     <>
-      {Array(4)
+      {Array(qty)
         .fill(null)
         .map((_, idx) => (
           <div
             key={idx}
-            className="basis-48 cursor-pointer px-4 py-5 bg-white rounded-xl shadow-md animate-pulse duration-75 md:mb-3"
+            className="cursor-pointer px-4 py-5 bg-white rounded-xl shadow-md animate-pulse duration-75 md:mb-3"
             style={{ animationDelay: `${idx * 200}ms` }}
           />
         ))}
@@ -14,4 +16,4 @@ const LoadingProjects = () => {
   );
 };
 
-export default LoadingProjects;
+export default LoadingSkeleton;

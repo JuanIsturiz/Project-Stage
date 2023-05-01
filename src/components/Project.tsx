@@ -3,7 +3,10 @@ import { FaTrash } from "react-icons/fa";
 import { LoadingSpinner } from "./loaders/LoadingSpinner";
 import { api } from "@/utils/trpc";
 
-const Project: FC<{ project: IProject }> = ({ project }) => {
+const Project: FC<{ project: IProject; onProjectClick: () => void }> = ({
+  project,
+  onProjectClick,
+}) => {
   const { id, title } = project;
 
   const ctx = api.useContext();
@@ -22,6 +25,7 @@ const Project: FC<{ project: IProject }> = ({ project }) => {
       <div
         key={id}
         className="basis-48 cursor-pointer text-center text-white font-medium text-lg px-4 py-2 bg-sky-400 rounded-xl shadow-md hover:bg-sky-500 dark:bg-[#0353a4] dark:hover:bg-sky-700"
+        onClick={onProjectClick}
       >
         <p>{title}</p>
       </div>

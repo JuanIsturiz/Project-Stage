@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { procedure, router } from "../trpc";
+import { TRPCError } from "@trpc/server";
 
 export const taskRouter = router({
   getAll: procedure
@@ -35,5 +36,33 @@ export const taskRouter = router({
         },
       });
       return task;
+    }),
+  remove: procedure
+    .input(
+      z.object({
+        id: z.string().cuid(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.task.delete({
+        where: {
+          id: input.id,
+        },
+      });
+      return true;
+    }),
+  update: procedure
+    .input(
+      z.object({
+        id: z.string(),
+        value: z.boolean(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.task.update({
+        where: { id: input.id },
+        data: { completed: input.value },
+      });
+      return true;
     }),
 });

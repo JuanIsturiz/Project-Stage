@@ -30,6 +30,11 @@ const Dashboard = () => {
       enabled: !!selectedProject && selectedProject !== null,
     }
   );
+
+  const handleProjectClick = (project: IProject) => {
+    setSelectedProject(project);
+  };
+
   return (
     <section className="max-w-6xl mx-auto px-4 mt-4">
       <div className="grid grid-rows-4 grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-1 md:gap-2">
@@ -40,15 +45,19 @@ const Dashboard = () => {
             </h3>
             <NewProjectForm />
             <hr className="my-4 border-sky-50 dark:border-zinc-600" />
-            <ProjectList projects={projects} isLoading={isLoadingProjects} />
+            <ProjectList
+              projects={projects}
+              isLoading={isLoadingProjects}
+              onProjectClick={handleProjectClick}
+            />
           </div>
         </div>
-        <div className="row-span-3 md:col-span-3 bg-zinc-50">
-          <div className="p-2 shadow-md rounded">
+        <div className="row-span-3 md:col-span-3">
+          <div className="p-2 shadow-md rounded dark:shadow-zinc-900">
             <h3 className="text-2xl text-center border-b-[1px] font-medium mb-2 dark:text-white">
               Tasks
             </h3>
-            <NewTaskForm />
+            <NewTaskForm selectedProject={selectedProject} />
             <hr className="my-4 dark:border-zinc-600" />
             <TaskList tasks={tasks} isLoading={isLoadingTasks} />
           </div>

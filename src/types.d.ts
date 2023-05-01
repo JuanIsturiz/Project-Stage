@@ -10,6 +10,7 @@ interface ITask {
   id: string;
   title: string;
   description?: string | null;
+  completed: boolean;
   dueTo: Date;
   projectId: string;
   createdAt: Date;

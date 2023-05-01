@@ -1,14 +1,19 @@
+import { FC } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Project from "./Project";
-import LoadingProjects from "./loaders/LoadingProjects";
-import { FC } from "react";
+import LoadingSkeleton from "./loaders/LoadingProjects";
 
 interface ProjectListProps {
   projects: IProject[] | undefined;
   isLoading: boolean;
+  onProjectClick: (project: IProject) => void;
 }
 
-const ProjectList: FC<ProjectListProps> = ({ projects, isLoading }) => {
+const ProjectList: FC<ProjectListProps> = ({
+  projects,
+  isLoading,
+  onProjectClick,
+}) => {
   const [parent] = useAutoAnimate();
   return (
     <div
@@ -16,10 +21,14 @@ const ProjectList: FC<ProjectListProps> = ({ projects, isLoading }) => {
       className="flex gap-4 flex-wrap justify-center mb-2 md:block"
     >
       {isLoading ? (
-        <LoadingProjects />
+        <LoadingSkeleton qty={4} />
       ) : (
         projects?.map((project) => (
-          <Project key={project.id} project={project} />
+          <Project
+            key={project.id}
+            project={project}
+            onProjectClick={() => onProjectClick(project)}
+          />
         ))
       )}
     </div>
