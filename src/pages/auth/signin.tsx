@@ -88,7 +88,7 @@ const SignIn = () => {
         </button>
       </div>
       <p className="text-lg mt-4 dark:text-white">
-        Doesn't have an account? Click{" "}
+        Doesn&apos;t have an account? Click{" "}
         <Link
           href={"/api/auth/signin"}
           className="text-sky-400 underline dark:text-sky-500"
