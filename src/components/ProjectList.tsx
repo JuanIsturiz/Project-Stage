@@ -7,7 +7,7 @@ interface ProjectListProps {
   projects: IProject[] | undefined;
   isLoading: boolean;
   onProjectClick: (project: IProject) => void;
-  selectedProject: IProject | undefined;
+  selectedProject: IProject | null;
 }
 
 const ProjectList: FC<ProjectListProps> = ({
