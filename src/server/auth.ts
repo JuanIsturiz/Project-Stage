@@ -87,9 +87,9 @@ export const AuthOptions: NextAuthOptions = {
       },
     }),
   ],
-  // pages: {
-  //   signIn: "/auth/signin",
-  // },
+  pages: {
+    signIn: "/auth/signin",
+  },
 };
 
 export const getServerAuthSession = (ctx: {
